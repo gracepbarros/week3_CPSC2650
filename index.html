@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 3 Exercise</title>
+</head>
+<body>
+  <button id="btn">Generate random cocktail</button>
+  <div id="cocktail">
+
+  </div>
+</body>
+<script>
+  const btn = document.getElementById('btn');
+  const cocktail = document.getElementById('cocktail');
+
+  btn.addEventListener('click', () => {
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+      .then(response => response.json())
+      .then(data => {
+        const drink = data.drinks[0];
+        const ingredients = [];
+        for (let i = 1; i <= 15; i++) {
+          if (drink[`strIngredient${i}`]) {
+            ingredients.push(`${drink[`strIngredient${i}`]} - ${drink[`strMeasure${i}`]}`);
+          }
+        }
+        cocktail.innerHTML = `
+          <h2>${drink.strDrink}</h2>
+          <img src="${drink.strDrinkThumb}" alt="${drink.strDrink}" style="width: 100px; height: 100px;">
+          <h3>Ingredients</h3>
+          <ul>
+            ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+          </ul>
+          <h3>Instructions</h3>
+          <p>${drink.strInstructions}</p>
+        `;
+      });
+  });
+</script>
+</html>
