@@ -4,12 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Week 3 Exercise</title>
+  <style>
+    body #cocktail{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+    }
+    img{
+      width: 60%;
+      padding: 2% 40%;
+    }
+    #cocktail{
+      min-height: 300px;
+      max-width: 600px;
+      border: 3px dashed black;
+      border-radius: 5%;
+    }
+    button{
+      margin: 20px;
+      padding: 10px;
+      font-size: 20px;
+      background-color: #2c9cc5;
+      color: white;}
+    p{
+      margin: 2% 10% ;
+    }
+  </style>
 </head>
 <body>
   <button id="btn">Generate random cocktail</button>
-  <div id="cocktail">
-
-  </div>
+  <div id="cocktail"></div>
 </body>
 <script>
   const btn = document.getElementById('btn');
@@ -28,7 +53,7 @@
         }
         cocktail.innerHTML = `
           <h2>${drink.strDrink}</h2>
-          <img src="${drink.strDrinkThumb}" alt="${drink.strDrink}" style="width: 100px; height: 100px;">
+          <img src="${drink.strDrinkThumb}" alt="${drink.strDrink}">
           <h3>Ingredients</h3>
           <ul>
             ${ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
